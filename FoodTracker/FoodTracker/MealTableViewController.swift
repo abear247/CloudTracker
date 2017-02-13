@@ -34,11 +34,15 @@ class MealTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         // Load any saved meals, otherwise load sample data.
         let defaults = UserDefaults.standard
-        guard (defaults.data(forKey: "username") as Data!) == nil else{
-            performSegue(withIdentifier: "Signup", sender: self)
-            return
-        }
-        guard (defaults.data(forKey: "password") as Data!) == nil else{
+//        guard let _ = defaults.string(forKey: "username")  else{
+//            performSegue(withIdentifier: "Signup", sender: self)
+//            return
+//        }
+//        guard let _ = defaults.string(forKey: "password")  else{
+//            performSegue(withIdentifier: "Signup", sender: self)
+//            return
+//        }
+        guard let _ = defaults.dictionary(forKey: "user") else{
             performSegue(withIdentifier: "Signup", sender: self)
             return
         }

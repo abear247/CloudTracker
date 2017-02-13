@@ -60,7 +60,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        let req = NSMutableURLRequest(url: NSURL(string:"http://159.203.243.24:8000/signup")! as URL)
+        let req = NSMutableURLRequest(url: URL(string:"http://159.203.243.24:8000/signup")!)
         
         req.httpBody = postJSON
         req.httpMethod = "POST"
@@ -78,7 +78,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            guard let rawJson = try? JSONSerialization.jsonObject(with: data, options: []) else {
+            guard let _ = try? JSONSerialization.jsonObject(with: data, options: []) else {
                 print("data returned is not json, or not valid")
                 return
             }
@@ -91,13 +91,14 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             
             // do something with the data returned (decode json, save to user defaults, etc.)
             let defaults = UserDefaults.standard
-            defaults.set(self.usernameTextField.text, forKey: "username")
-            defaults.set(self.passwordTextField.text, forKey: "password")
+            defaults.set(self.usernameTextField.text!, forKey: "username")
+            defaults.set(self.passwordTextField.text!, forKey: "password")
+            self.dismiss(animated: true, completion: nil)
         }
         
         task.resume()
        
-        self.dismiss(animated: true, completion: nil)
+       
     }
     
     
