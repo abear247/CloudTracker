@@ -34,19 +34,19 @@ class MealTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         // Load any saved meals, otherwise load sample data.
         let defaults = UserDefaults.standard
-//        guard let _ = defaults.string(forKey: "username")  else{
-//            performSegue(withIdentifier: "Signup", sender: self)
-//            return
-//        }
-//        guard let _ = defaults.string(forKey: "password")  else{
-//            performSegue(withIdentifier: "Signup", sender: self)
-//            return
-//        }
-        guard let _ = defaults.dictionary(forKey: "user") else{
+        guard let _ = defaults.string(forKey: "username")  else{
             performSegue(withIdentifier: "Signup", sender: self)
             return
         }
-        performSegue(withIdentifier: "Login", sender: self)
+        guard let _ = defaults.string(forKey: "password")  else{
+            performSegue(withIdentifier: "Signup", sender: self)
+            return
+        }
+        guard let _ = defaults.dictionary(forKey: "user") else{
+            performSegue(withIdentifier: "Login", sender: self)
+            return
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

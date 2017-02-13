@@ -75,7 +75,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            guard let rawJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String,Dictionary<String,String>> else {
+            guard let rawJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! [String:[String:String]] else {
                 print("data returned is not json, or not valid")
                 return
             }
