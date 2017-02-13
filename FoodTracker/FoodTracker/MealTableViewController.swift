@@ -30,6 +30,20 @@ class MealTableViewController: UITableViewController {
             loadSampleMeals()
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Load any saved meals, otherwise load sample data.
+        let defaults = UserDefaults.standard
+        guard (defaults.data(forKey: "username") as Data!) == nil else{
+            performSegue(withIdentifier: "Signup", sender: self)
+            return
+        }
+        guard (defaults.data(forKey: "password") as Data!) == nil else{
+            performSegue(withIdentifier: "Signup", sender: self)
+            return
+        }
+        performSegue(withIdentifier: "Login", sender: self)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -133,6 +147,9 @@ class MealTableViewController: UITableViewController {
             let selectedMeal = meals[indexPath.row]
             mealDetailViewController.meal = selectedMeal
             
+        case "Signup": break
+            
+        case "Login": break
         default:
             fatalError("Unexpected Segue Identifier; \(segue.identifier)")
         }
