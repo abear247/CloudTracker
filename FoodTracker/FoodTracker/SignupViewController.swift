@@ -55,12 +55,26 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             "username": usernameTextField.text ?? "",
             "password": passwordTextField.text ?? ""
         ]
-        
+        let defaults = UserDefaults.standard
         let cloudTracker = CloudTrackerAPI()
-     
+//        cloudTracker.postRequest(postData: postData, completion: {
+//            (completion: [String:[String:String]]) in
+//             defaults.set(completion["user"], forKey: "user")
+//             self.dismiss(animated: true, completion: nil)
+//        })
         
-       
-       
+        cloudTracker.post(data: postData as [String : AnyObject], toEndpoint: "signup", completion: {
+            (completion:(data: Data?, error: NSError?)) in
+            guard let rawJSON = try? JSONSerialization.jsonObject(with: completion.data!, options: []) as! [String:[String:String]] else {
+                print("data returned is not json, or not valid")
+                return
+            }
+            
+//            defaults.set(self.usernameTextField.text!, forKey: "username")
+//            defaults.set(self.passwordTextField.text!, forKey: "password")
+            defaults.set(rawJSON["user"], forKey: "user")
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
     

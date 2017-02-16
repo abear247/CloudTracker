@@ -38,11 +38,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //MARK: Actions
     @IBAction func saveButton(_ sender: Any) {
         let defaults = UserDefaults.standard
-        guard (usernameTextField.text! as String) == (defaults.value(forKey: "username") as! String) else{
+        guard (usernameTextField.text! as String) == (defaults.value(forKey: "username") as? String) else{
             self.incorrectInfoLabel.isHidden = false
             return
         }
-        guard (passwordTextField.text! as String) == (defaults.value(forKey: "password") as! String) else{
+        guard (passwordTextField.text! as String) == (defaults.value(forKey: "password") as? String) else{
             self.incorrectInfoLabel.isHidden = false
             return
         }

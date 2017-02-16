@@ -113,7 +113,18 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         
         // Set the meal to be passed to MealTableViewController after the unwind segue.
         meal = Meal(name: name, photo: photo, rating: rating)
+        let ct = CloudTrackerAPI()
+        guard let upload = meal else {
+            return
+        }
+        ct.saveMeal(meal: upload, completion: {
+            (completion:(NSError?)) in
+            return
+        })
     }
+    
+
+
     
     //MARK: Actions
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
